@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import c19 from './data/covid19.json'
+import index from './src/index'
 
 const port = process.env.PORT || 8082
 const app = express()
@@ -10,14 +11,10 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Starts server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
-})
-
 // Route definition
 app.get('/', (req, res) => {
-  res.send('Hello world! covid-19 data about this api and endpoints, when the data was pulled and credits to where the data is from')
+  res.send('This API is a coding project by Peggy @blipsandclicks made during Technigo bootcamp 2020 Fall session for educational purposes. Here you will find Covid-19 for a subset countries which was pulled on the 7th of December 2020. It is not being updated. Please do not use this API. The data is from the COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University; it can be found here (they maintain and update their data daily): https://github.com/CSSEGISandData/COVID-19 ')
+  // res.send(index)
 })
 
 // Route for entire array
@@ -57,4 +54,9 @@ app.get('/types/:type', (req,res) => {
     byType = byType.filter((item) => item.country === country)
   }
   res.json(byType)
+})
+
+// Starts server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`)
 })
